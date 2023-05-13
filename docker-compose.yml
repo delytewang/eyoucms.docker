@@ -1,0 +1,21 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        ports:
+            - 23306:3306
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: set_root_password
+            MYSQL_DATABASE: eyou
+            MYSQL_USER: eyou
+            MYSQL_PASSWORD: set_user_password
+    php:
+        image: delyte/php
+        ports:
+            - 7080:80
+        volumes:
+            - ".:/var/www/html"
+        links:
+            - db:db
